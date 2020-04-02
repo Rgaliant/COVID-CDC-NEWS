@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { useQuery } from "@apollo/react-hooks";
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
+import CoronaNumbers from "./CoronaNumbers";
 
 const CovidNumbers = () => (
   <Query
@@ -73,12 +74,18 @@ export default class RenderNewsTable extends React.Component {
       articles: null,
       countries: null,
       open: true,
-      viewAll: false
+      viewAll: false,
+      totalCases: null,
+      totalDeaths: null,
+      totalRecovered: null,
+      affectedCountries: null
     };
   }
 
   componentDidMount = () => {
     this.getCDCArticles();
+    this.getTotals();
+    setInterval(this.getTotals, 50000);
   };
 
   getCDCArticles = () => {
@@ -95,18 +102,31 @@ export default class RenderNewsTable extends React.Component {
       });
   };
 
+  getTotals = () => {
+    axios.get("https://corona.lmao.ninja/all").then(response => {
+      this.setState({
+        totalCases: response.data.cases,
+        totalDeaths: response.data.deaths,
+        totalRecovered: response.data.recovered,
+        affectedCountries: response.data.affectedCountries
+      });
+    });
+  };
+
   render() {
     return (
       <>
-        {/* <button onClick={() => this.setState({ viewAll: !this.state.viewAll })}>
-          View All Numbers
-        </button> */}
-        {this.state.viewAll && (
-          <div>
-            <CovidButton />
-          </div>
-        )}
-        {this.state.open && <CovidNumbers />}
+        <div>
+          {this.state.open && <CovidNumbers />}
+        </div>
+        <div style={{ width: "70%", marginLeft: "15%", marginTop: "5%" }}>
+          <CoronaNumbers
+            totalCases={this.state.totalCases}
+            totalDeaths={this.state.totalDeaths}
+            totalRecovered={this.state.totalRecovered}
+            affectedCountries={this.state.affectedCountries}
+          />
+        </div>
         <Grid container>
           <Grid item xs={12}>
             <div style={{ marginTop: "50px" }}>
@@ -114,7 +134,7 @@ export default class RenderNewsTable extends React.Component {
                 {this.state.articles &&
                   this.state.articles.map(article => {
                     return (
-                      <Grid item xs={12} sm={8}>
+                      <Grid item xs={12} sm={5}>
                         <NewsCard article={article} />
                       </Grid>
                     );

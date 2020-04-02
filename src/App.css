@@ -50,6 +50,7 @@ span {
   overflow: hidden;
   position: absolute;
   animation: marquee 1000s linear infinite;
+  top: 10px;
 }
 
 .marquee span {
