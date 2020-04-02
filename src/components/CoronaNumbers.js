@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Grid, Segment, Statistic } from "semantic-ui-react";
+import { Grid, Segment, Statistic, Responsive } from "semantic-ui-react";
 import styled from "styled-components";
 
 const CardText = styled.p`
@@ -19,52 +19,52 @@ export default class CoronaNumbers extends React.Component {
 
   render() {
     return (
-      <Grid>
+      <Grid stackable>
         <Grid.Row columns={4}>
           <Grid.Column>
-            <Segment color="red" raised size="massive">
+            <Responsive as={Segment} color="red" raised size="big">
               <Statistic>
-                <Statistic.Value>
+                <h2>
                   {this.props.totalCases
                     ? this.formatNumber(this.props.totalCases)
                     : null}
-                </Statistic.Value>
+                </h2>
                 <Statistic.Label>Total Cases</Statistic.Label>
               </Statistic>
-            </Segment>
+            </Responsive>
           </Grid.Column>
           <Grid.Column>
-            <Segment color="red" raised size="massive">
+            <Segment color="red" raised size="big">
               <Statistic>
-                <Statistic.Value>
+                <h2>
                   {this.props.totalDeaths
                     ? this.formatNumber(this.props.totalDeaths)
                     : null}
-                </Statistic.Value>
+                </h2>
                 <Statistic.Label>Total Deaths</Statistic.Label>
               </Statistic>
             </Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment color="red" raised size="massive">
+            <Segment color="red" raised size="big">
               <Statistic>
-                <Statistic.Value>
+                <h2>
                   {this.props.totalRecovered
                     ? this.formatNumber(this.props.totalRecovered)
                     : null}
-                </Statistic.Value>
+                </h2>
                 <Statistic.Label>Total Recovered</Statistic.Label>
               </Statistic>
             </Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment color="red" raised size="massive">
+            <Segment color="red" raised size="big">
               <Statistic>
-                <Statistic.Value>
+                <h2>
                   {this.props.affectedCountries
                     ? this.formatNumber(this.props.affectedCountries)
                     : null}
-                </Statistic.Value>
+                </h2>
                 <Statistic.Label>Total Countries</Statistic.Label>
               </Statistic>
             </Segment>

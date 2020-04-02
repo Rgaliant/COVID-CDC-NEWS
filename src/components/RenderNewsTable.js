@@ -116,10 +116,10 @@ export default class RenderNewsTable extends React.Component {
   render() {
     return (
       <>
-        <div>
+        <div style={{marginBottom: '90px'}}>
           {this.state.open && <CovidNumbers />}
         </div>
-        <div style={{ width: "70%", marginLeft: "15%", marginTop: "5%" }}>
+        <div style={{ width: "80%", marginLeft: "9.5%"}}>
           <CoronaNumbers
             totalCases={this.state.totalCases}
             totalDeaths={this.state.totalDeaths}
