@@ -15,6 +15,10 @@
   }
 }
 
+span {
+  padding: 1px;
+}
+
 .App-header {
   background-color: #e3e2e1;
   ;
@@ -37,5 +41,30 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.marquee {
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+  position: absolute;
+  animation: marquee 1000s linear infinite;
+}
+
+.marquee span {
+  display: inline-block;
+}
+
+.marquee2 span {
+  animation-delay: 2.5s;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
   }
 }
